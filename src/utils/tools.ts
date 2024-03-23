@@ -14,7 +14,7 @@ import { windowSizeTools } from '@/utils/windowSizeTools'
 
 
 // https://stackoverflow.com/a/47349998
-export const getDeviceLanguage = async() => {
+export const getDeviceLanguage = async () => {
   // let deviceLanguage = Platform.OS === 'ios'
   //   ? NativeModules.SettingsManager.settings.AppleLocale ||
   //     NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
@@ -56,9 +56,9 @@ export const TEMP_FILE_PATH = temporaryDirectoryPath + '/tempFile'
 //   // return windowSize
 // }
 
-export const checkStoragePermissions = async() => PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
+export const checkStoragePermissions = async () => PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
 
-export const requestStoragePermission = async() => {
+export const requestStoragePermission = async () => {
   const isGranted = await checkStoragePermissions()
   if (isGranted) return isGranted
 
@@ -131,7 +131,7 @@ export const toast = (message: string, duration: 'long' | 'short' = 'short', pos
   ToastAndroid.showWithGravity(message, _duration, _position)
 }
 
-export const openUrl = async(url: string): Promise<void> => Linking.canOpenURL(url).then(async() => Linking.openURL(url))
+export const openUrl = async (url: string): Promise<void> => Linking.canOpenURL(url).then(async () => Linking.openURL(url))
 
 export const assertApiSupport = (source: LX.Source): boolean => {
   return source == 'local' || global.lx.qualityList[source] != null
@@ -146,7 +146,7 @@ export const exitApp = () => {
   BackHandler.exitApp()
 }
 
-export const handleSaveFile = async(path: string, data: any) => {
+export const handleSaveFile = async (path: string, data: any) => {
   // if (!path.endsWith('.json')) path += '.json'
   // const buffer = gzip(data)
   const tempFilePath = `${temporaryDirectoryPath}/tempFile.json`
@@ -179,7 +179,7 @@ export const handleReadFile = async<T = unknown>(path: string): Promise<T> => {
   return data
 }
 
-export const confirmDialog = async({
+export const confirmDialog = async ({
   title = '',
   message = '',
   cancelButtonText = global.i18n.t('dialog_cancel'),
@@ -209,7 +209,7 @@ export const confirmDialog = async({
   })
 }
 
-export const tipDialog = async({
+export const tipDialog = async ({
   title = '',
   message = '',
   btnText = global.i18n.t('dialog_confirm'),
@@ -237,7 +237,7 @@ export const clipboardWriteText = (str: string) => {
 }
 
 
-export const checkNotificationPermission = async() => {
+export const checkNotificationPermission = async () => {
   const isHide = await getData(storageDataPrefix.notificationTipEnable)
   if (isHide != null) return
   const enabled = await isNotificationsEnabled()
@@ -279,7 +279,7 @@ export const checkNotificationPermission = async() => {
 }
 
 
-export const checkIgnoringBatteryOptimization = async() => {
+export const checkIgnoringBatteryOptimization = async () => {
   const isHide = await getData(storageDataPrefix.ignoringBatteryOptimizationTipEnable)
   if (isHide != null) return
   const enabled = await isIgnoringBatteryOptimization()
@@ -319,10 +319,10 @@ export const checkIgnoringBatteryOptimization = async() => {
     )
   })
 }
-export const resetNotificationPermissionCheck = async() => {
+export const resetNotificationPermissionCheck = async () => {
   return removeData(storageDataPrefix.notificationTipEnable)
 }
-export const resetIgnoringBatteryOptimizationCheck = async() => {
+export const resetIgnoringBatteryOptimizationCheck = async () => {
   return removeData(storageDataPrefix.ignoringBatteryOptimizationTipEnable)
 }
 
@@ -540,7 +540,7 @@ export const getRowInfo = (type: RowInfoType = 'full'): RowInfo => {
 export const toMD5 = stringMd5
 
 
-export const cheatTip = async() => {
+export const cheatTip = async () => {
   const isRead = await getData<boolean>(storageDataPrefix.cheatTip)
   if (isRead) return
 

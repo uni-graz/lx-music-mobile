@@ -4,7 +4,7 @@ import { playList, playNext } from '@/core/player/player'
 import { addTempPlayList } from '@/core/player/tempPlayList'
 import settingState from '@/store/setting/state'
 import { getListMusicSync } from '@/utils/listManage'
-import { confirmDialog, shareMusic, toast } from '@/utils/tools'
+import { confirmDialog, requestStoragePermission, shareMusic, toast } from '@/utils/tools'
 import { addDislikeInfo, hasDislike } from '@/core/dislikeList'
 import playerState from '@/store/player/state'
 import RNFetchBlob from 'rn-fetch-blob'
@@ -32,31 +32,37 @@ export const handelDownload = (musicInfo: any) => {
   if (musicInfo.meta._qualitys['320k']) {
     quality = "320k"
   }
-  getMusicUrl({ musicInfo, quality, isRefresh: true }).then(url => {
-    console.log(url);
-    const extension = getFileExtension(url);
-    const fileName = musicInfo.name;
-    const downloadDir = RNFetchBlob.fs.dirs.DownloadDir + "/lx.music";
-    const path = `${downloadDir}/${fileName}.${extension}`
-    const config = {
-      fileCache: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        notification: true,
-        path: path,
-        description: '正在下载文件...',
-      },
-    };
-    RNFetchBlob.config(config)
-      .fetch('GET', url)
-      .then((res) => {
-        console.log('文件下载成功！路径：', res.path());
-        toast("文件下载成功!", 'long')
-      })
-      .catch((error) => {
-        console.log('文件下载失败：', error);
-      });
-  });
+  return requestStoragePermission().then(async () => {
+    getMusicUrl({ musicInfo, quality, isRefresh: true }).then(url => {
+      console.log(url);
+      const extension = getFileExtension(url);
+      const fileName = musicInfo.name;
+      const downloadDir = RNFetchBlob.fs.dirs.DownloadDir + "/lx.music";
+      const path = `${downloadDir}/${fileName}.${extension}`
+      const config = {
+        fileCache: true,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          notification: true,
+          path: path,
+          description: '正在下载文件...',
+        },
+      };
+      RNFetchBlob.config(config)
+        .fetch('GET', url)
+        .then((res) => {
+          console.log('文件下载成功！路径：', res.path());
+          toast("文件下载成功!", 'long')
+        })
+        .catch((error) => {
+          console.log('文件下载失败：', error);
+        });
+    });
+  }).catch((e) => {
+    return Promise.reject(e ?? "权限获取失败")
+  })
+
+
 }
 
 
