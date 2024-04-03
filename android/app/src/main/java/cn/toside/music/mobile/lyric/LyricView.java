@@ -1,4 +1,4 @@
-package cn.toside.music.mobile.lyric;
+package com.ikunshare.music.mobile.lyric;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cn.toside.music.mobile.R;
+import com.ikunshare.music.mobile.R;
 
 public class LyricView extends Activity implements View.OnTouchListener {
   LyricSwitchView textView = null;

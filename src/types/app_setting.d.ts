@@ -112,7 +112,7 @@ declare global {
       'player.togglePlayMethod': 'listLoop' | 'random' | 'list' | 'singleLoop' | 'none'
 
       /**
-       * 是否优先播放320k音质
+       * 是否优先播放Hires音质
        */
       'player.isPlayHighQuality': boolean
 
