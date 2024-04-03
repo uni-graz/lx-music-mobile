@@ -4,6 +4,7 @@ import ikun_api_kg from './kg/api-ikun'
 import ikun_api_tx from './tx/api-ikun'
 import ikun_api_wy from './wy/api-ikun'
 import ikun_api_mg from './mg/api-ikun'
+import ikun_api_kw from './kw/api-ikun'
 
 import settingState from '@/store/setting/state'
 
@@ -13,6 +14,7 @@ const apiList = {
   ikun_api_tx,
   ikun_api_wy,
   ikun_api_mg,
+  ikun_api_kw,
 }
 const supportQuality = {}
 

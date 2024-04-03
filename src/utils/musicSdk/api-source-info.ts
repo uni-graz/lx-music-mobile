@@ -15,6 +15,7 @@ const sources: Array<{
       tx: ['128k','320k','flac','flac24bit'],
       wy: ['128k','320k','flac','flac24bit'],
       mg: ['128k','320k','flac','flac24bit'],
+      kw: ['128k','320k','flac','flac24bit'],
     }
   }
 ]
