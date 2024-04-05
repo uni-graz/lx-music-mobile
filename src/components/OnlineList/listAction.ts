@@ -29,15 +29,15 @@ export function getFileExtension(url: string) {
 // export const handelDownload = (musicInfo: LX.Music.MusicInfoOnline) => {
 export const handelDownload = (musicInfo: any) => {
   let quality: LX.Quality = "128k"
-  if (musicInfo.meta._qualitys['320k']) {
-    quality = "320k"
+  if (musicInfo.meta._qualitys['flac24bit']) {
+    quality = "flac24bit"
   }
   return requestStoragePermission().then(async () => {
     getMusicUrl({ musicInfo, quality, isRefresh: true }).then(url => {
       console.log(url);
       const extension = getFileExtension(url);
       const fileName = musicInfo.name;
-      const downloadDir = RNFetchBlob.fs.dirs.DownloadDir + "/lx.music";
+      const downloadDir = RNFetchBlob.fs.dirs.DownloadDir + "/lxmusic.download";
       const path = `${downloadDir}/${fileName}.${extension}`
       const config = {
         fileCache: true,

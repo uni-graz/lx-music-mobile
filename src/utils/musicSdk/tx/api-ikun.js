@@ -4,7 +4,7 @@ import { headers, timeout } from '../options'
 
 const api_ikun = {
   getMusicUrl(songInfo, type) {
-    const requestObj = httpFetch(`https://lx.ikunshare.com:9763/url/tx/${songInfo.songmid}/${type}`, {
+    const requestObj = httpFetch(`https://lxmusic.ikunshare.com:9763/url/tx/${songInfo.songmid}/${type}`, {
       method: 'get',
       timeout,
       headers,
