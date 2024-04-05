@@ -11,8 +11,8 @@ import { useI18n } from '@/lang'
 import Text from '@/components/common/Text'
 import { showPactModal } from '@/core/common'
 
-const qqGroupUrl = 'mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26jump_from%3Dwebapi%26k%3Du-QA8abVMOuIa6ELWvRHJElGJMWgtNen'
-const qqGroupWebUrl = 'https://qm.qq.com/cgi-bin/qm/qr?k=d6JQ8iGx724JXfal6XLJkYsqoPqTKah1&jump_from=webapi&authKey=VR1+2QSm5stDL2DCWipab0SixDnM48xaDmmUirboONvmPCsodd89lU7Pexv1X1kt'
+const qqGroupUrl = 'mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26jump_from%3Dwebapi%26k%3DSiGj7xffjpy3rIV4uSqPuYOqpoeZswiA'
+const qqGroupWebUrl = 'https://qm.qq.com/cgi-bin/qm/qr?k=3zPqfEOmWyCnqaPotttfrn66wpI1rt5T&jump_from=webapi&authKey=9xLSpFJFeVGvMRzuyRfZm87FsieykS+WNx5Jv81As1giQJyJVSSQ8udgfoQSLGls'
 
 export default memo(() => {
   const theme = useTheme()
