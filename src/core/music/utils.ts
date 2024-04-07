@@ -211,7 +211,7 @@ export const getOnlineOtherSourcePicByLocal = async (musicInfo: LX.Music.MusicIn
 export const getPlayQuality = (highQuality: boolean, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
   let type: LX.Quality = '128k'
   let list = global.lx.qualityList[musicInfo.source]
-  if (highQuality && musicInfo.meta._qualitys['flac'] && list && list.includes('flac')) type = 'flac'
+  if (highQuality && musicInfo.meta._qualitys['flac24bit'] && list && list.includes('flac24bit')) type = 'flac24bit'
   return type
 }
 
