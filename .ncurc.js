@@ -6,6 +6,11 @@ module.exports = {
     'react',
   ],
 
+  // target: 'newest',
+  // filter: [
+  //   'react-native-navigation',
+  // ],
+
   // target: 'patch',
   // filter: [
   //   '@types/react-native',
