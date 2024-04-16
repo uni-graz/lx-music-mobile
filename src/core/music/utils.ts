@@ -208,10 +208,19 @@ export const getOnlineOtherSourcePicByLocal = async (musicInfo: LX.Music.MusicIn
   })
 }
 
-export const getPlayQuality = (highQuality: boolean, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
+export const TRY_QUALITYS_LIST = ['flac24bit', 'flac', '320k'] as const
+type TryQualityType = typeof TRY_QUALITYS_LIST[number]
+export const getPlayQuality = (highQuality: LX.Quality, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
   let type: LX.Quality = '128k'
-  let list = global.lx.qualityList[musicInfo.source]
-  if (highQuality && musicInfo.meta._qualitys['flac24bit'] && list && list.includes('flac24bit')) type = 'flac24bit'
+  if (TRY_QUALITYS_LIST.includes(highQuality as TryQualityType)) {
+    let list = global.lx.qualityList[musicInfo.source]
+
+    let t = TRY_QUALITYS_LIST
+      .slice(TRY_QUALITYS_LIST.indexOf(highQuality as TryQualityType))
+      .find(q => musicInfo.meta._qualitys[q] && list?.includes(q))
+
+    if (t) type = t
+  }
   return type
 }
 
@@ -236,7 +245,7 @@ export const getOnlineOtherSourceMusicUrl = async ({ musicInfos, quality, onTogg
     if (retryedSource.includes(musicInfo.source)) continue
     retryedSource.push(musicInfo.source)
     if (!assertApiSupport(musicInfo.source)) continue
-    itemQuality = quality ?? getPlayQuality(settingState.setting['player.isPlayHighQuality'], musicInfo)
+    itemQuality = quality ?? getPlayQuality(settingState.setting['player.playQuality'], musicInfo)
     if (!musicInfo.meta._qualitys[itemQuality]) continue
 
     console.log('try toggle to: ', musicInfo.source, musicInfo.name, musicInfo.singer, musicInfo.interval)
@@ -283,7 +292,7 @@ export const handleGetOnlineMusicUrl = async ({ musicInfo, quality, onToggleSour
 }> => {
   if (!await global.lx.apiInitPromise[0]) throw new Error('source init failed')
   // console.log(musicInfo.source)
-  const targetQuality = quality ?? getPlayQuality(settingState.setting['player.isPlayHighQuality'], musicInfo)
+  const targetQuality = quality ?? getPlayQuality(settingState.setting['player.playQuality'], musicInfo)
 
   let reqPromise
   try {
