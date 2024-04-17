@@ -24,9 +24,7 @@ const Hitokoto: React.FC = () => {
   }, []);
 
   return (
-    <View>
-      <Text>{word}</Text>
-    </View>
+    bootLog(word)
   );
 };
 
