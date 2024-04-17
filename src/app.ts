@@ -7,8 +7,8 @@ import { exitApp } from './utils/nativeModules/utils'
 import { windowSizeTools } from './utils/windowSizeTools'
 import { listenLaunchEvent } from './navigation/regLaunchedEvent'
 import { tipDialog } from './utils/tools'
+import { toast } from '@/utils/tools'
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
 
 console.log('starting app...')
 listenLaunchEvent()
@@ -24,7 +24,7 @@ const Hitokoto: React.FC = () => {
   }, []);
 
   return (
-    bootLog(word)
+    toast(word)
   );
 };
 
