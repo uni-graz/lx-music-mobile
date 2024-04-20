@@ -156,6 +156,7 @@ export default () => {
         onRemove={info => { hancelExitSelect(); handleRemove(info.listId, info.musicInfo, info.selectedList, hancelExitSelect) }}
         onDislikeMusic={info => { void handleDislikeMusic(info.musicInfo) }}
         onCopyName={info => { handleShare(info.musicInfo) }}
+        onDownload={info => { handleShare(info.musicInfo) }}
         onAdd={handleAddMusic}
         onMove={handleMoveMusic}
         onEditMetadata={handleEditMetadata}
