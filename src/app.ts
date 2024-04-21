@@ -7,28 +7,9 @@ import { exitApp } from './utils/nativeModules/utils'
 import { windowSizeTools } from './utils/windowSizeTools'
 import { listenLaunchEvent } from './navigation/regLaunchedEvent'
 import { tipDialog } from './utils/tools'
-import { toast } from '@/utils/tools'
-import React, { useEffect, useState } from 'react';
 
 console.log('starting app...')
 listenLaunchEvent()
-
-const App: React.FC = () => {
-  const [word, setWord] = useState<string>('');
-
-  useEffect(() => {
-    fetch('https://v1.hitokoto.cn')
-      .then(response => response.json())
-      .then(data => setWord(data.hitokoto))
-      .catch(error => console.error('Error fetching one word:', error));
-  }, []);
-
-  return (
-    toast(word)
-  );
-};
-
-export default App;
 
 void Promise.all([getFontSize(), windowSizeTools.init()]).then(async([fontSize]) => {
   global.lx.fontSize = fontSize
