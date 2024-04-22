@@ -22,8 +22,8 @@ export interface ListMenuProps {
   onCopyName: (selectInfo: SelectInfo) => void
   onChangePosition: (selectInfo: SelectInfo) => void
   onDislikeMusic: (selectInfo: SelectInfo) => void
-  onDownload: (selectInfo: SelectInfo) => void
   onRemove: (selectInfo: SelectInfo) => void
+  onDownload: (selectInfo: SelectInfo) => void
 }
 export interface ListMenuType {
   show: (selectInfo: SelectInfo, position: Position) => void

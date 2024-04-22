@@ -11,6 +11,7 @@
   "change_position_list_title": "Change the position of the list",
   "change_position_music_multi_title": "Adjust the position of the selected {num} song to",
   "change_position_music_title": "Adjust the position of {name} to",
+  "download_music_title": "Adjust the download of {name}",
   "change_position_tip": "Please enter a new position",
   "close": "Close",
   "collect": "Collect",

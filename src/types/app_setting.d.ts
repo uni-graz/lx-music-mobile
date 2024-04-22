@@ -115,7 +115,7 @@ declare global {
        * 是否优先播放320k音质
        */
       'player.isPlayHighQuality': boolean
-
+      'player.playQuality': LX.Quality
       /**
        * 启动软件时是否恢复上次播放进度
        */
