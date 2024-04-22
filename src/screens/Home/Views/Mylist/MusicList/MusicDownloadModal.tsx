@@ -132,14 +132,11 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
   }
   useImperativeHandle(ref, () => ({
     show(info) {
-      console.log("useImperativeHandle");
-      console.log(info);
       selectedInfo.current = info
+      calcQualitys();
       if (visible) {
-        calcQualitys();
         handleShow()
       } else {
-        calcQualitys();
         setVisible(true)
         requestAnimationFrame(() => {
           handleShow()
