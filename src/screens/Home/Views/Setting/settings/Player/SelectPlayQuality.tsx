@@ -83,7 +83,7 @@ const styles = createStyle({
     marginTop: 10,
   },
   list: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'nowrap',
   },
 })
