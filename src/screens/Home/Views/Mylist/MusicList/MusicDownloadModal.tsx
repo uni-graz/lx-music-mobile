@@ -86,7 +86,6 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
       return;
     }
     getOtherSource(selectedInfo.current?.musicInfo, true).then(res => {
-      console.log(res);
       if (res.length == 0) {
         setPlayQualityList(Object.values(qualityMap));
         return;
