@@ -208,10 +208,17 @@ export const getOnlineOtherSourcePicByLocal = async (musicInfo: LX.Music.MusicIn
   })
 }
 
-export const getPlayQuality = (highQuality: boolean, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
+// export const getPlayQuality = (highQuality: boolean, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
+//   let type: LX.Quality = '128k'
+//   let list = global.lx.qualityList[musicInfo.source]
+//   if (highQuality && musicInfo.meta._qualitys['flac'] && list && list.includes('flac')) type = 'flac'
+//   return type
+// }
+
+export const getPlayQuality = (playQuality: LX.Quality, musicInfo: LX.Music.MusicInfoOnline): LX.Quality => {
   let type: LX.Quality = '128k'
   let list = global.lx.qualityList[musicInfo.source]
-  if (highQuality && musicInfo.meta._qualitys['flac'] && list && list.includes('flac')) type = 'flac'
+  if (musicInfo.meta._qualitys[playQuality] && list && list.includes(playQuality)) type = playQuality
   return type
 }
 
@@ -236,7 +243,8 @@ export const getOnlineOtherSourceMusicUrl = async ({ musicInfos, quality, onTogg
     if (retryedSource.includes(musicInfo.source)) continue
     retryedSource.push(musicInfo.source)
     if (!assertApiSupport(musicInfo.source)) continue
-    itemQuality = quality ?? getPlayQuality(settingState.setting['player.isPlayHighQuality'], musicInfo)
+    // itemQuality = quality ?? getPlayQuality(settingState.setting['player.isPlayHighQuality'], musicInfo)
+    itemQuality = quality ?? getPlayQuality(settingState.setting['player.playQuality'], musicInfo)
     if (!musicInfo.meta._qualitys[itemQuality]) continue
 
     console.log('try toggle to: ', musicInfo.source, musicInfo.name, musicInfo.singer, musicInfo.interval)
@@ -283,7 +291,7 @@ export const handleGetOnlineMusicUrl = async ({ musicInfo, quality, onToggleSour
 }> => {
   if (!await global.lx.apiInitPromise[0]) throw new Error('source init failed')
   // console.log(musicInfo.source)
-  const targetQuality = quality ?? getPlayQuality(settingState.setting['player.isPlayHighQuality'], musicInfo)
+  const targetQuality = quality ?? getPlayQuality(settingState.setting['player.playQuality'], musicInfo)
 
   let reqPromise
   try {

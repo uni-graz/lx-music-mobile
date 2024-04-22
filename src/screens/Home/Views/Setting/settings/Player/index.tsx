@@ -9,6 +9,7 @@ import IsAutoCleanPlayedList from './IsAutoCleanPlayedList'
 import IsShowNotificationImage from './IsShowNotificationImage'
 import IsShowLyricTranslation from './IsShowLyricTranslation'
 import IsShowLyricRoma from './IsShowLyricRoma'
+import SelectPlayQuality from './SelectPlayQuality'
 import IsS2T from './IsS2T'
 import MaxCache from './MaxCache'
 import { useI18n } from '@/lang'
@@ -21,13 +22,14 @@ export default memo(() => {
     <Section title={t('setting_player')}>
       <IsSavePlayTime />
       <IsAutoCleanPlayedList />
-      <IsPlayHighQuality />
+      {/* <IsPlayHighQuality /> */}
       <IsHandleAudioFocus />
       <IsEnableAudioOffload />
       <IsShowNotificationImage />
       <IsShowLyricTranslation />
       <IsShowLyricRoma />
       <IsS2T />
+      <SelectPlayQuality />
       <MaxCache />
     </Section>
   )

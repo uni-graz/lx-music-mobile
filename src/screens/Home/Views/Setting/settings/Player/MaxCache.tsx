@@ -46,7 +46,7 @@ export default memo(() => {
 
 const styles = createStyle({
   content: {
-    marginTop: 10,
+    marginTop: 0,
     marginBottom: 15,
   },
 })
