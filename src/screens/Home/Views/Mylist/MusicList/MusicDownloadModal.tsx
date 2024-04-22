@@ -6,7 +6,6 @@ import Text from '@/components/common/Text'
 import { createStyle } from '@/utils/tools'
 import CheckBox from '@/components/common/CheckBox'
 import { handelDownload } from './listAction'
-import log from '@/plugins/sync/log'
 import { getOtherSource } from '@/core/music/utils'
 
 interface TitleType {
@@ -62,46 +61,15 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
     [key: string]: MusicOption;
   }
 
-  // const playQualityList = useMemo(() => {
-  //   return [
-  //     {
-  //       id: "128k",
-  //       name: "标准音质(3.78MB)",
-  //     }, {
-  //       id: "320k",
-  //       name: "高品音质(9.46MB)",
-  //     },
-  //     {
-  //       id: "flac",
-  //       name: "无损音质(30.54MB)",
-  //     }, {
-  //       id: "flac24bit",
-  //       name: "Hi-Res音质(49MB)",
-  //     }
-  //   ] as MusicOption[]
-  //   //return ['128k', '320k', 'flac', 'flac24bit'] as LX.Quality[]
-  // }, [])
-
-  // const keyMap = ;
-
-
-  const keyValueArray = [
-    { key: '128k', value: '标准音质' },
-    { key: '320k', value: '高品音质' },
-    { key: 'flac', value: '无损音质' },
-    { key: 'flac', value: 'Hi-Res音质' },
-    { key: 'flac24bit', value: 'value3' },
-    // 其他键值对...
-  ];
-
   const calcQualitys = () => {
+    setPlayQualityList([])
     const map = new Map();
     map.set("128k", "标准音质");
     map.set("320k", "高品音质");
     map.set("flac", "无损音质");
     map.set("flac24bit", "Hi-Res音质");
-
     const qualitys = selectedInfo.current?.musicInfo.meta.qualitys;
+
     let qualityMap: QualityMap = {};
     for (let index = 0; index < qualitys.length; index++) {
       const element = qualitys[index];
@@ -113,12 +81,8 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
       }
       qualityMap[element.type] = temp;
     }
-    console.log(Object.values(qualityMap));
-    console.log(222);
-
+    setPlayQualityList(Object.values(qualityMap));
     if (Object.values(qualityMap).length == map.size) {
-      console.log(333);
-      setPlayQualityList(Object.values(qualityMap));
       return;
     }
     getOtherSource(selectedInfo.current?.musicInfo, true).then(res => {
@@ -127,7 +91,6 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
         setPlayQualityList(Object.values(qualityMap));
         return;
       }
-
       for (let index = 0; index < res.length; index++) {
         const element = res[index];
         let qualitys = element.meta.qualitys
@@ -153,7 +116,6 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
     }).catch(err => {
 
     })
-    // setPlayQualityList(Object.values(qualityMap));
   }
 
   const handleShow = () => {
@@ -168,8 +130,11 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
   useImperativeHandle(ref, () => ({
     show(listInfo) {
       selectedInfo.current = listInfo
-      calcQualitys();
-      if (visible) handleShow()
+
+      if (visible) {
+        calcQualitys();
+        handleShow()
+      }
       else {
         setVisible(true)
         requestAnimationFrame(() => {
@@ -183,6 +148,7 @@ export default forwardRef<MusicDownloadModalType, MusicDownloadModalProps>(({ on
     setSelectedQuality("128k");
     alertRef.current?.setVisible(false)
     handelDownload(selectedInfo.current?.musicInfo, selectedQuality);
+    onDownloadInfo(selectedInfo.current);
   }
 
   interface MusicOption {
