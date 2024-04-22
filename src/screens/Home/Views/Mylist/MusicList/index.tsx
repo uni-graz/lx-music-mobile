@@ -152,7 +152,7 @@ export default () => {
       <MusicPositionModal ref={musicPositionModalRef}
         onUpdatePosition={(info, postion) => { handleUpdateMusicPosition(postion, info.listId, info.musicInfo, info.selectedList, hancelExitSelect) }} />
       <MusicDownloadModal ref={musicDownloadModalRef}
-        onDownloadInfo={(info) => { handelDownload(info.musicInfo) }} />
+        onDownloadInfo={(info) => { handelDownload(info.musicInfo, "128k") }} />
       <ListMenu
         ref={listMenuRef}
         onPlay={info => { handlePlay(info.listId, info.index) }}

@@ -45,6 +45,7 @@ const diffCurrentMusicInfo = (curMusicInfo: LX.Music.MusicInfo | LX.Download.Lis
 // export const handelDownload = (musicInfo: LX.Music.MusicInfoOnline) => {
 export const handelDownload = (musicInfo: any, quality: LX.Quality) => {
   return requestStoragePermission().then(async () => {
+    console.log(quality);
     try {
       getMusicUrl({
         musicInfo, quality, isRefresh: true, onToggleSource(mInfo) {

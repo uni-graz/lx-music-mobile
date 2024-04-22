@@ -9,6 +9,7 @@ import MusicDownloadModal, { type MusicDownloadModalType } from '@/screens/Home/
 import MultipleModeBar, { type MultipleModeBarType, type SelectMode } from './MultipleModeBar'
 import { handleDislikeMusic, handlePlay, handlePlayLater, handleShare } from './listAction'
 import { createStyle } from '@/utils/tools'
+import { handelDownload } from '@/screens/Home/Views/Mylist/MusicList/listAction'
 
 export interface OnlineListProps {
   onRefresh: ListProps['onRefresh']
@@ -105,13 +106,15 @@ export default forwardRef<OnlineListType, OnlineListProps>(({
       </View>
       <ListMusicAdd ref={listMusicAddRef} onAdded={() => { hancelExitSelect() }} />
       <ListMusicMultiAdd ref={listMusicMultiAddRef} onAdded={() => { hancelExitSelect() }} />
+      <MusicDownloadModal ref={musicDownloadModalRef}
+        onDownloadInfo={(info) => { handelDownload(info.musicInfo, "128k") }} />
       <ListMenu
         ref={listMenuRef}
         onPlay={info => { handlePlay(info.musicInfo) }}
         onPlayLater={info => { hancelExitSelect(); handlePlayLater(info.musicInfo, info.selectedList, hancelExitSelect) }}
         onCopyName={info => { handleShare(info.musicInfo) }}
         onAdd={handleAddMusic}
-        onDownload={info => { handleShare(info.musicInfo) }}
+        onDownload={info => musicDownloadModalRef.current?.show(info)}
         onDislikeMusic={info => { void handleDislikeMusic(info.musicInfo) }}
       />
       {/* <LoadingMask ref={loadingMaskRef} /> */}
