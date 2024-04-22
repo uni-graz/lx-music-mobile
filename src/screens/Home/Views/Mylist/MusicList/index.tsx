@@ -152,7 +152,7 @@ export default () => {
       <MusicPositionModal ref={musicPositionModalRef}
         onUpdatePosition={(info, postion) => { handleUpdateMusicPosition(postion, info.listId, info.musicInfo, info.selectedList, hancelExitSelect) }} />
       <MusicDownloadModal ref={musicDownloadModalRef}
-        onDownloadInfo={(info) => { handelDownload(info.musicInfo, "128k") }} />
+        onDownloadInfo={(info) => { }} />
       <ListMenu
         ref={listMenuRef}
         onPlay={info => { handlePlay(info.listId, info.index) }}
@@ -160,7 +160,7 @@ export default () => {
         onRemove={info => { hancelExitSelect(); handleRemove(info.listId, info.musicInfo, info.selectedList, hancelExitSelect) }}
         onDislikeMusic={info => { void handleDislikeMusic(info.musicInfo) }}
         onCopyName={info => { handleShare(info.musicInfo) }}
-        onDownload={info => musicDownloadModalRef.current?.show(info)}
+        onDownload={info => musicDownloadModalRef.current?.show(info.musicInfo)}
         onAdd={handleAddMusic}
         onMove={handleMoveMusic}
         onEditMetadata={handleEditMetadata}

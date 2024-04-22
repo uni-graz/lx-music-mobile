@@ -107,14 +107,14 @@ export default forwardRef<OnlineListType, OnlineListProps>(({
       <ListMusicAdd ref={listMusicAddRef} onAdded={() => { hancelExitSelect() }} />
       <ListMusicMultiAdd ref={listMusicMultiAddRef} onAdded={() => { hancelExitSelect() }} />
       <MusicDownloadModal ref={musicDownloadModalRef}
-        onDownloadInfo={(info) => { handelDownload(info.musicInfo, "128k") }} />
+        onDownloadInfo={(info) => { }} />
       <ListMenu
         ref={listMenuRef}
         onPlay={info => { handlePlay(info.musicInfo) }}
         onPlayLater={info => { hancelExitSelect(); handlePlayLater(info.musicInfo, info.selectedList, hancelExitSelect) }}
         onCopyName={info => { handleShare(info.musicInfo) }}
         onAdd={handleAddMusic}
-        onDownload={info => musicDownloadModalRef.current?.show(info)}
+        onDownload={info => musicDownloadModalRef.current?.show(info.musicInfo)}
         onDislikeMusic={info => { void handleDislikeMusic(info.musicInfo) }}
       />
       {/* <LoadingMask ref={loadingMaskRef} /> */}
